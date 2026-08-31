@@ -14,6 +14,6 @@ def build_features(frame: pd.DataFrame, spike_threshold: float = 150.0) -> pd.Da
 
     future_prices = pd.concat([data["RRP"].shift(-step) for step in range(1, 7)], axis=1)
     data["future_max_30m"] = future_prices.max(axis=1)
-    data["spike_next_30m"] = (data["future_max_30m"] >= spike_threshold).astype(int)
+    data["spike_next_30m"] = (data["future_max_30m"] >= spike_threshold).astype(float)
     data.loc[future_prices.isna().any(axis=1), "spike_next_30m"] = np.nan
     return data.dropna(subset=FEATURE_COLUMNS + ["spike_next_30m"]).reset_index(drop=True)

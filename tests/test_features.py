@@ -16,5 +16,5 @@ def test_spike_target_only_uses_future_rows():
         }
     )
     features = build_features(frame, spike_threshold=150)
-    row = features.loc[features["SETTLEMENTDATE"] == times[4]].iloc[0]
+    row = features.loc[features["SETTLEMENTDATE"] == times[6]].iloc[0]
     assert row["spike_next_30m"] == 1
